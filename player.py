@@ -23,11 +23,11 @@ import json
 
 class Player:
   def __init__(self, id64):
-    load_data(self,id64)
+    self.load_data(id64)
   
   def load_data(self, id64):
-    url = "http://logs.tf/json_search?&player=" + steam_id_64
-    json = urllib.request.urlopen(url1)
-    output_string = json.read().decode('utf-8')
+    url = "http://logs.tf/json_search?&player=" + id64
+    json_obj = urllib.request.urlopen(url)
+    output_string = json_obj.read().decode('utf-8')
     self.data = json.loads(output_string)
     
