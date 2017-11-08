@@ -1,7 +1,7 @@
 '''
 Driver file
 To do:
-  - fix get_id64 bug
+  - make logs list into a dict(zip(ids, logs))
   - Improve search for common games--radix/bucket-ish with duplicate checking?
   - Reverse print order more efficiently
   - allow searching of a greater number of common players
