@@ -11,7 +11,7 @@ Data Members:
 Methods:
   __init__(self, id64)
   load_data(self, id64)
-  
+
 Tools:
   Sample urls:
     url1 = 'http://logs.tf/json_search?&player=76561198055233348'
@@ -24,10 +24,16 @@ import json
 class Player:
   def __init__(self, id64):
     self.load_data(id64)
-  
+    #convert logs from list to dict
+    game_ids = []
+    for i in self.data['logs']:
+        game_ids.append(i['id'])
+    id_dict = dict(zip(game_ids, self.data['logs']))
+    self.data['logs'] = id_dict
+
   def load_data(self, id64):
     url = "http://logs.tf/json_search?&player=" + id64
     json_obj = urllib.request.urlopen(url)
     output_string = json_obj.read().decode('utf-8')
     self.data = json.loads(output_string)
-    
+

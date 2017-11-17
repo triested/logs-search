@@ -1,11 +1,8 @@
 '''
 Driver file
 To do:
-  - make logs list into a dict(zip(ids, logs))
-  - Improve search for common games--radix/bucket-ish with duplicate checking?
-  - Reverse print order more efficiently
-  - allow searching of a greater number of common players
-  - "vanity search" - highest damage differential:
+    - allow searching of a greater number of common players
+    - "vanity search" - highest damage differential:
     - incorporate STEAMID conversion (shouldn't require the API)
 Tools:
 Couple of urls:
@@ -19,7 +16,7 @@ ID64_LENGTH = 17
 MAX_PLAYERS = 2
 
 def get_id64():
-  
+
   while True:
     url_input = input("Enter player URL: ")
     id_index = url_input.find("/profile/")
@@ -32,27 +29,26 @@ def get_id64():
       continue
     else:
       return steam_id_64
-  
+
 def print_common_logs(players):
   if len(players) > MAX_PLAYERS:
     raise RuntimeError("Too many players for now!")
-  for i in reversed(players[0].data['logs']):
-    for j in reversed(players[1].data['logs']):
-      if i['id'] == j['id']:
-        print(i['title'])
-        print("http://logs.tf/" + str(i['id']))
+  for key in players[0].data['logs']:
+    if key in players[1].data['logs']:
+      print(players[1].data['logs'][key]['title'])
+      print("http://logs.tf/" + str(players[1].data['logs'][key]['id']))
 
 def main():
   print("Hi! This script finds urls of logs common to two players.")
   print("You'll need to provide their two logs.tf pages:")
-  
+
   players = []
 
   p1 = player.Player(get_id64())
   players.append(p1)
   p2 = player.Player(get_id64())
   players.append(p2)
-    
+
   print_common_logs(players)
 
 if __name__ == "__main__":
