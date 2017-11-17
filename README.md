@@ -2,7 +2,13 @@
 Search logs.tf for games common to two players
 
 ## Usage:
-Find the [logs.tf](logs.tf) profiles of the players in question. When prompted, enter the urls. Note: the resulting list of logs is currently limited to the most recent 1000 games of __both__ players.
+To run, enter the following in a terminal:
+   
+   $ python3 logs-search
+
+You'll need the [logs.tf](logs.tf) profiles of the players in question. When prompted, enter their urls. The script will print titles and links for games in which they appear together.
+
+Note: the resulting list of logs is currently limited to the most recent 1000 games of __both__ players.
 
 ## Future Plans
     * web interface
